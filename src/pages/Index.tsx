@@ -1,14 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Index = () => {
+  const heroAnimation = useScrollAnimation();
+  const servicesAnimation = useScrollAnimation();
+  const testimonialsAnimation = useScrollAnimation();
+  const pricingAnimation = useScrollAnimation();
+
   return (
     <div className="min-h-screen bg-white">
       
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-warm-beige to-light-beige py-20 px-4">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div ref={heroAnimation.ref} className={`max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center transition-all duration-1000 ${
+          heroAnimation.isVisible ? 'animate-fade-in-up' : 'opacity-0'
+        }`}>
           <div className="space-y-6">
             <h1 className="text-5xl font-bold text-dark-brown leading-tight">
               Обретите гармонию с помощью 
@@ -41,7 +49,9 @@ const Index = () => {
 
       {/* Services Section */}
       <section className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
+        <div ref={servicesAnimation.ref} className={`max-w-6xl mx-auto transition-all duration-1000 ${
+          servicesAnimation.isVisible ? 'animate-fade-in-up' : 'opacity-0'
+        }`}>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-dark-brown mb-4">
               Мои специализации
@@ -52,7 +62,9 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-gradient-to-br from-light-beige to-warm-beige border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <Card className={`bg-gradient-to-br from-light-beige to-warm-beige border-none shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 ${
+              servicesAnimation.isVisible ? 'animate-fade-in-left' : ''
+            }`}>
               <CardHeader className="text-center pb-4">
                 <div className="mx-auto w-16 h-16 bg-accent-orange rounded-full flex items-center justify-center mb-4">
                   <Icon name="Brain" size={32} className="text-white" />
@@ -66,7 +78,9 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-light-beige to-warm-beige border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <Card className={`bg-gradient-to-br from-light-beige to-warm-beige border-none shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 ${
+              servicesAnimation.isVisible ? 'animate-scale-in' : ''
+            }`}>
               <CardHeader className="text-center pb-4">
                 <div className="mx-auto w-16 h-16 bg-accent-orange rounded-full flex items-center justify-center mb-4">
                   <Icon name="MessageCircle" size={32} className="text-white" />
@@ -80,7 +94,9 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-light-beige to-warm-beige border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <Card className={`bg-gradient-to-br from-light-beige to-warm-beige border-none shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 ${
+              servicesAnimation.isVisible ? 'animate-fade-in-right' : ''
+            }`}>
               <CardHeader className="text-center pb-4">
                 <div className="mx-auto w-16 h-16 bg-accent-orange rounded-full flex items-center justify-center mb-4">
                   <Icon name="Users" size={32} className="text-white" />
@@ -97,9 +113,96 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className="py-20 px-4 bg-white">
+        <div ref={testimonialsAnimation.ref} className={`max-w-6xl mx-auto transition-all duration-1000 ${
+          testimonialsAnimation.isVisible ? 'animate-fade-in-up' : 'opacity-0'
+        }`}>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-dark-brown mb-4">
+              Отзывы клиентов
+            </h2>
+            <p className="text-xl text-medium-brown max-w-2xl mx-auto">
+              Истории людей, которые нашли свой путь к гармонии
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className={`bg-gradient-to-br from-light-beige to-warm-beige border-none shadow-lg hover:shadow-xl transition-all duration-500 ${
+              testimonialsAnimation.isVisible ? 'animate-fade-in-left' : ''
+            }`}>
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <img 
+                    src="/img/7a27a73b-4f49-4333-b5a9-13fbc861956e.jpg" 
+                    alt="Елена"
+                    className="w-12 h-12 rounded-full object-cover mr-4"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-dark-brown">Елена, 32 года</h4>
+                    <div className="flex text-accent-orange">
+                      {[...Array(5)].map((_, i) => <Icon key={i} name="Star" size={16} fill="currentColor" />)}
+                    </div>
+                  </div>
+                </div>
+                <p className="text-medium-brown leading-relaxed">
+                  "Анна помогла мне разобраться с послеродовой депрессией. Благодаря её поддержке я снова чувствую радость материнства и уверенность в себе."
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className={`bg-gradient-to-br from-light-beige to-warm-beige border-none shadow-lg hover:shadow-xl transition-all duration-500 ${
+              testimonialsAnimation.isVisible ? 'animate-scale-in' : ''
+            }`}>
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <img 
+                    src="/img/f22291c0-ed20-415f-8f22-d4e8b62f1b2a.jpg" 
+                    alt="Михаил"
+                    className="w-12 h-12 rounded-full object-cover mr-4"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-dark-brown">Михаил, 45 лет</h4>
+                    <div className="flex text-accent-orange">
+                      {[...Array(5)].map((_, i) => <Icon key={i} name="Star" size={16} fill="currentColor" />)}
+                    </div>
+                  </div>
+                </div>
+                <p className="text-medium-brown leading-relaxed">
+                  "Семейная терапия спасла наш брак. Мы научились понимать друг друга и строить здоровые отношения. Очень рекомендую!"
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className={`bg-gradient-to-br from-light-beige to-warm-beige border-none shadow-lg hover:shadow-xl transition-all duration-500 md:col-span-2 lg:col-span-1 ${
+              testimonialsAnimation.isVisible ? 'animate-fade-in-right' : ''
+            }`}>
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 rounded-full bg-accent-orange flex items-center justify-center mr-4">
+                    <Icon name="User" size={24} className="text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-dark-brown">Анонимно, 28 лет</h4>
+                    <div className="flex text-accent-orange">
+                      {[...Array(5)].map((_, i) => <Icon key={i} name="Star" size={16} fill="currentColor" />)}
+                    </div>
+                  </div>
+                </div>
+                <p className="text-medium-brown leading-relaxed">
+                  "Интегративный подход позволил мне увидеть проблемы под разными углами. Теперь я знаю, как справляться со стрессом и тревогой."
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Pricing Section */}
       <section className="py-20 px-4 bg-gradient-to-br from-muted to-light-beige">
-        <div className="max-w-6xl mx-auto">
+        <div ref={pricingAnimation.ref} className={`max-w-6xl mx-auto transition-all duration-1000 ${
+          pricingAnimation.isVisible ? 'animate-fade-in-up' : 'opacity-0'
+        }`}>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-dark-brown mb-4">
               Тарифы и услуги
@@ -111,7 +214,9 @@ const Index = () => {
           
           <div className="grid md:grid-cols-3 gap-8">
             {/* Basic Plan */}
-            <Card className="bg-white border-2 border-warm-beige shadow-lg hover:shadow-xl transition-all duration-300">
+            <Card className={`bg-white border-2 border-warm-beige shadow-lg hover:shadow-xl transition-all duration-500 ${
+              pricingAnimation.isVisible ? 'animate-fade-in-left' : ''
+            }`}>
               <CardHeader className="text-center pb-6">
                 <CardTitle className="text-2xl text-dark-brown mb-2">Индивидуальная консультация</CardTitle>
                 <div className="text-4xl font-bold text-accent-orange mb-4">5 000 ₽</div>
@@ -139,7 +244,9 @@ const Index = () => {
             </Card>
 
             {/* Premium Plan */}
-            <Card className="bg-white border-2 border-accent-orange shadow-xl hover:shadow-2xl transition-all duration-300 relative">
+            <Card className={`bg-white border-2 border-accent-orange shadow-xl hover:shadow-2xl transition-all duration-500 relative ${
+              pricingAnimation.isVisible ? 'animate-scale-in' : ''
+            }`}>
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                 <span className="bg-accent-orange text-white px-6 py-2 rounded-full text-sm font-semibold">
                   Популярный
@@ -176,7 +283,9 @@ const Index = () => {
             </Card>
 
             {/* VIP Plan */}
-            <Card className="bg-white border-2 border-dark-blue shadow-lg hover:shadow-xl transition-all duration-300">
+            <Card className={`bg-white border-2 border-dark-blue shadow-lg hover:shadow-xl transition-all duration-500 ${
+              pricingAnimation.isVisible ? 'animate-fade-in-right' : ''
+            }`}>
               <CardHeader className="text-center pb-6">
                 <CardTitle className="text-2xl text-dark-brown mb-2">Семейная терапия</CardTitle>
                 <div className="text-4xl font-bold text-accent-orange mb-4">7 000 ₽</div>
